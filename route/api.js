@@ -1,68 +1,81 @@
 const express = require('express');
 const sh = express.Router();
-var api_skizo = "https://skizo.tech/api/"
-var headers = {
-    'Content-Type': 'application/json',
-    'Authorization': 'https://skizo.tech'
-};
-var no_link_message = {
-  creator: 'Zainudin',
-  message: 'Mohon maaf, tidak ada URL yang dimasukkan ke dalam body.'
-};
-var no_region_message = {
-  creator: 'Zainudin',
-  message: 'Mohon maaf, tidak ada REGION yang dimasukkan ke dalam body.'
-};
-var no_username_message = {
-  creator: 'Zainudin',
-  message: 'Mohon maaf, tidak ada USERNAME yang dimasukkan ke dalam body.'
-};
 
-/*Download all*/
-sh.post('/download', async (req, res) => {
-  if(!req.body.url) return res.json(no_link_message)
-  var resp = await fetch(api_skizo + 'download', {
-    method: 'POST',
-    headers: headers,
-    body: JSON.stringify({
-      url: req.body.url
-    }),
-  });
-  res.json(await resp.json());
+let { igApi, getCookie } = require("insta-fetcher");
+let ig = new igApi("")//Cookie instagram.com
+
+/*Respon nyet*/
+var creator = 'https://github.com/xznsenpai'
+var no_link_message = {
+  creator: creator,
+  message: 'Mohon maaf, tidak ada URL yang dimasukkan ke dalam.'
+};
+var no_user_message = {
+  creator: creator,
+  message: 'Mohon maaf, tidak ada USER yang dimasukkan ke dalam.'
+};
+var Error_message = {
+  creator: creator,
+  message: 'Maaf, terjadi kesalahan internal pada server. Silakan coba lagi nanti atau hubungi tim dukungan teknis.'
+}
+
+/*Fetch instagram api with full details and simplified json metadata*/
+sh.get('/instagram', async (req, res) => {
+  if (!req.query.url) return res.status(400).json(no_link_message);
+  ig.fetchPost(req.query.url)
+    .then((v) => {
+      res.status(200).json({
+        creator: creator,
+        ...v
+      });
+    })
+    .catch((Error) => {
+      console.log(Error);
+      res.status(500).json(Error_message);
+    });
 });
-/*Tiktok Downloaders*/
-sh.post('/tiktok', async (req, res) => {
-  if(!req.body.url) return res.json(no_link_message)
-  var resp = await fetch(api_skizo + 'tiktok', {
-    method: 'POST',
-    headers: headers,
-    body: JSON.stringify({
-      url: req.body.url
-    }),
-  });
-  res.json(await resp.json());
+sh.post('/instagram', async (req, res) => {
+  if (!req.body.url) return res.status(400).json(no_link_message);
+  ig.fetchPost(req.body.url)
+    .then((v) => {
+      res.status(200).json({
+        creator: creator,
+        ...v
+      });
+    })
+    .catch((Error) => {
+      console.log(Error);
+      res.status(500).json(Error_message);
+    });
 });
-sh.post('/tiktok/search', async (req, res) => {
-  if(!req.body.search) return res.json(no_username_message)
-  var resp = await fetch(api_skizo + 'ttsearch', {
-    method: 'POST',
-    headers: headers,
-    body: JSON.stringify({
-      search: req.body.search
-    }),
-  });
-  res.json(await resp.json());
+
+sh.get('/instagram/stalk', async (req, res) => {
+  if (!req.query.user) return res.status(400).json(no_user_message);
+  ig.fetchUser(req.query.user)
+    .then((v) => {
+      res.status(200).json({
+        creator: creator,
+        ...v
+      });
+    })
+    .catch((Error) => {
+      console.log(Error);
+      res.status(500).json(Error_message);
+    });
 });
-sh.post('/tiktok/trending-feed', async (req, res) => {
-  if(!req.body.region) return res.json(no_region_message)
-  var resp = await fetch(api_skizo + 'tttrending', {
-    method: 'POST',
-    headers: headers,
-    body: JSON.stringify({
-      region: req.body.region
-    }),
-  });
-  res.json(await resp.json());
+sh.post('/instagram/stalk', async (req, res) => {
+  if (!req.body.user) return res.status(400).json(no_user_message);
+  ig.fetchUser(req.body.user)
+    .then((v) => {
+      res.status(200).json({
+        creator: creator,
+        ...v
+      });
+    })
+    .catch((Error) => {
+      console.log(Error);
+      res.status(500).json(Error_message);
+    });
 });
 
 module.exports = sh;

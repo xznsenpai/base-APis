@@ -10,7 +10,7 @@ const options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "Api-Skizo",
+      title: "insta-fetcher API Documentation",
       version: "1.0.0",
     },
   },
@@ -20,22 +20,36 @@ const options = {
 /**
  * @swagger
  * tags:
- *   name: Download
- *   description: Fb, ig, tt, twit, yt
- */
-/**
- * @swagger
- * tags:
- *   name: TikTok
- *   description: Tools
+ *   name: insta-fetcher
+ *   description: Fetch instagram api with full details and simplified json metadata
  */
 
 /**
  * @swagger
- * /api/download:
+ * /api/instagram:
+ *   get:
+ *     summary: Fetch instagram api with full details and simplified json metadata
+ *     tags: [insta-fetcher]
+ *     parameters:
+ *       - in: query
+ *         name: url
+ *         schema:
+ *           type: string
+ *           format: url
+ *         required: true
+ *         description: input url instagram
+ *     responses:
+ *       200:
+ *         description: Request berhasil dieksekusi dengan sukses.
+ *       404:
+ *          description: Data tidak ditemukan atau endpoint tidak valid.
+ */
+/**
+ * @swagger
+ * /api/instagram:
  *   post:
- *     summary: Download All	
- *     tags: [Download]
+ *     summary: Fetch instagram api with full details and simplified json metadata	
+ *     tags: [insta-fetcher]
  *     requestBody:
  *       required: true
  *       content:
@@ -46,73 +60,42 @@ const options = {
  *               url:
  *                 type: string
  *                 format: url
- *                 example: ""
- *                 description: URL Tiktok yang akan diunduh
+ *                 example: "https://www.instagram.com/p/C2Tf_XuPCH8/?igsh=MTI4ampneGNsbTZxaA=="
+ *                 description: Fetch instagram api with full details and simplified json metadata
+ * 
  *     responses:
  *       200:
- *         description: Powered By Skizo.tech
- *         content:
- *           application/json:
- *             schema:
- */
-/**
- * @swagger
- * /api/tiktok:
- *   post:
- *     summary: Tiktok Downloader
- *     tags: [TikTok]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               url:
- *                 type: string
- *                 format: url
- *                 example: "https://vm.tiktok.com/ZSNoRuPf6"
- *                 description: URL Tiktok yang akan diunduh
- *     responses:
- *       200:
- *         description: Powered By Skizo.tech
- *         content:
- *           application/json:
- *             schema:
+ *         description: Request berhasil dieksekusi dengan sukses.
+ *       404:
+ *          description: Data tidak ditemukan atau endpoint tidak valid.
  */
 
 /**
  * @swagger
- * /api/tiktok/search:
- *   post:
- *     summary: Tiktok Search
- *     tags: [TikTok]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               search:
- *                 type: string
- *                 format: search
- *                 example: "cosplay nana"
- *                 description: no desk nyet
+ * /api/instagram/stalk:
+ *   get:
+ *     summary: Fetch instagram api with full details and simplified json metadata
+ *     tags: [insta-fetcher]
+ *     parameters:
+ *       - in: query
+ *         name: user
+ *         schema:
+ *           type: string
+ *           format: user
+ *         required: true
+ *         description: input username
  *     responses:
  *       200:
- *         description: Powered By Skizo.tech
- *         content:
- *           application/json:
- *             schema:
+ *         description: Request berhasil dieksekusi dengan sukses.
+ *       404:
+ *          description: Data tidak ditemukan atau endpoint tidak valid.
  */
- 
- /**
+/**
  * @swagger
- * /api/tiktok/trending-feed:
+ * /api/instagram/stalk:
  *   post:
- *     summary: Tiktok Trending
- *     tags: [TikTok]
+ *     summary: Fetch instagram api with full details and simplified json metadata	
+ *     tags: [insta-fetcher]
  *     requestBody:
  *       required: true
  *       content:
@@ -120,17 +103,17 @@ const options = {
  *           schema:
  *             type: object
  *             properties:
- *               region:
+ *               user:
  *                 type: string
- *                 format: region
- *                 example: "ID"
- *                 description: no desk nyet
+ *                 format: user
+ *                 example: "jokowi"
+ *                 description: Fetch instagram api with full details and simplified json metadata
+ * 
  *     responses:
  *       200:
- *         description: Powered By Skizo.tech
- *         content:
- *           application/json:
- *             schema:
+ *         description: Request berhasil dieksekusi dengan sukses.
+ *       404:
+ *          description: Data tidak ditemukan atau endpoint tidak valid.
  */
 
 const swaggerDoc = swaggerJSDoc(options);
