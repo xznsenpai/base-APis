@@ -31,6 +31,17 @@
 > node .
 ```
 
+# getCookie
+
+```
+let { igApi, getCookie } = require("insta-fetcher");
+// you can get sesion id by using getSessionId function, it requires username & password
+(async () => {
+  const session_id = await getCookie("username", "password");
+  console.log(session_id);
+})();
+```
+
 Check your site in [http://localhost:5000](http://localhost:5000)
 
 # Donation

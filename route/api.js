@@ -49,35 +49,6 @@ sh.post('/instagram', async (req, res) => {
     });
 });
 
-sh.get('/instagram/stalk', async (req, res) => {
-  if (!req.query.user) return res.status(400).json(no_user_message);
-  ig.fetchUser(req.query.user)
-    .then((v) => {
-      res.status(200).json({
-        creator: creator,
-        ...v
-      });
-    })
-    .catch((Error) => {
-      console.log(Error);
-      res.status(500).json(Error_message);
-    });
-});
-sh.post('/instagram/stalk', async (req, res) => {
-  if (!req.body.user) return res.status(400).json(no_user_message);
-  ig.fetchUser(req.body.user)
-    .then((v) => {
-      res.status(200).json({
-        creator: creator,
-        ...v
-      });
-    })
-    .catch((Error) => {
-      console.log(Error);
-      res.status(500).json(Error_message);
-    });
-});
-
 module.exports = sh;
 /*
 penulis: https://github.com/xznsenpai
