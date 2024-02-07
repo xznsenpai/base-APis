@@ -14,7 +14,6 @@ sh.use('/api', api);
 
 sh.listen(8080, async () => {
   console.log({
-    status: 'Active',
-    message: 'powered by https://github.com/xznsenpai'
+    message: 'menyala abangkuh....'
   })
 });

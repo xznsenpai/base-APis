@@ -1,8 +1,6 @@
 const express = require('express');
+const { igApi, getCookie } = require("insta-fetcher");
 const sh = express.Router();
-
-let { igApi, getCookie } = require("insta-fetcher");
-
 /*Respon nyet*/
 var creator = 'Zainudin'
 var no_text_message = {
@@ -64,4 +62,5 @@ sh.post('/instagram/getcookie', async (req, res) => {
     })
   }
 });
+
 module.exports = sh;
