@@ -31,19 +31,10 @@
 > node .
 ```
 
-# getCookie
+Check your site in [http://localhost:8080](http://localhost:8080)
 
-```
-let { igApi, getCookie } = require("insta-fetcher");
-// you can get sesion id by using getSessionId function, it requires username & password
-(async () => {
-  const session_id = await getCookie("username", "password");
-  console.log(session_id);
-})();
-```
-
-Check your site in [http://localhost:5000](http://localhost:5000)
-
+views:
+[api.zeiyy.me] (https://api.zeiyy.me)
 # Donation
 
 [![saweria](https://saweria.co/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhomepage_characters.a1cf6cc4.svg&w=3840&q=75)](https://saweria.co/xxivmmiii)
