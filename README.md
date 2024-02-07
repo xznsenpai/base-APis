@@ -34,7 +34,7 @@
 Check your site in [http://localhost:8080](http://localhost:8080)
 
 views:
-[api.zeiyy.me] (https://api.zeiyy.me)
+[api.zeiyy.me](https://api.zeiyy.me)
 # Donation
 
 [![saweria](https://saweria.co/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fhomepage_characters.a1cf6cc4.svg&w=3840&q=75)](https://saweria.co/xxivmmiii)
