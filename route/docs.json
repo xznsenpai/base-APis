@@ -1,0 +1,96 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "zeiyy.me",
+    "description": "API Documentation",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Downloaders",
+      "description": "API endpoints for downloading content from various platforms."
+    },
+    {
+      "name": "Tools",
+      "description": "API endpoints for Tools content from various platforms."
+    }
+  ],
+  "paths": {
+    "/api/instagram": {
+      "post": {
+        "summary": "Download Instagram content",
+        "tags": ["Downloaders"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "format": "url",
+                    "example": "https://www.instagram.com/p/C2Tf_XuPCH8/",
+                    "description": "The URL of the Instagram post to be downloaded."
+                  },
+                  "cookie": {
+                    "type": "string",
+                    "format": "cookie",
+                    "example": "",
+                    "description": "Optional. The cookie string for authenticated access to Instagram."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request berhasil dieksekusi dengan sukses."
+          },
+          "404": {
+            "description": "Data tidak ditemukan atau endpoint tidak valid."
+          }
+        }
+      }
+    },
+    "/api/instagram/getcookie": {
+      "post": {
+        "summary": "Getcookie Instagram content",
+        "tags": ["Tools"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "format": "username",
+                    "example": "Akkunmu_1998",
+                    "description": ""
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password",
+                    "example": "xxxxxxx",
+                    "description": ""
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request berhasil dieksekusi dengan sukses."
+          },
+          "404": {
+            "description": "Data tidak ditemukan atau endpoint tidak valid."
+          }
+        }
+      }
+    }
+  }
+}

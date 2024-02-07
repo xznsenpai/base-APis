@@ -12,12 +12,9 @@ sh.get('/', (req, res) => {
 sh.use('/', docs);
 sh.use('/api', api);
 
-sh.listen(5000, async () => {
+sh.listen(8080, async () => {
   console.log({
     status: 'Active',
     message: 'powered by https://github.com/xznsenpai'
   })
 });
-/*
-penulis: https://github.com/xznsenpai
-*/

@@ -2,40 +2,30 @@ const express = require('express');
 const sh = express.Router();
 
 let { igApi, getCookie } = require("insta-fetcher");
-let ig = new igApi("")//Cookie instagram.com
 
 /*Respon nyet*/
-var creator = 'https://github.com/xznsenpai'
+var creator = 'Zainudin'
+var no_text_message = {
+  creator: creator,
+  message: 'TEXT not found, please enter TEXT'
+}
 var no_link_message = {
   creator: creator,
-  message: 'Mohon maaf, tidak ada URL yang dimasukkan ke dalam.'
+  message: 'URL not found, please enter URL'
 };
-var no_user_message = {
+var no_cookie_message = {
   creator: creator,
-  message: 'Mohon maaf, tidak ada USER yang dimasukkan ke dalam.'
-};
+  message: 'COOKIE not found, please enter COOKIE'
+}
 var Error_message = {
   creator: creator,
-  message: 'Maaf, terjadi kesalahan internal pada server. Silakan coba lagi nanti atau hubungi tim dukungan teknis.'
+  message: 'Sorry, an internal error occurred on the server'
 }
-
-/*Fetch instagram api with full details and simplified json metadata*/
-sh.get('/instagram', async (req, res) => {
-  if (!req.query.url) return res.status(400).json(no_link_message);
-  ig.fetchPost(req.query.url)
-    .then((v) => {
-      res.status(200).json({
-        creator: creator,
-        ...v
-      });
-    })
-    .catch((Error) => {
-      console.log(Error);
-      res.status(500).json(Error_message);
-    });
-});
+//Downloaders
 sh.post('/instagram', async (req, res) => {
   if (!req.body.url) return res.status(400).json(no_link_message);
+  if (!req.body.cookie) return res.status(400).json(no_cookie_message)
+  let ig = new igApi(req.body.cookie)
   ig.fetchPost(req.body.url)
     .then((v) => {
       res.status(200).json({
@@ -45,11 +35,33 @@ sh.post('/instagram', async (req, res) => {
     })
     .catch((Error) => {
       console.log(Error);
-      res.status(500).json(Error_message);
+      res.status(500).json({
+        ...Error_message,
+        Error: Error.toString()
+      });
     });
 });
-
+sh.post('/instagram/getcookie', async (req, res) => {
+  if (!req.body.username) return res.status(400).json({
+    creator: creator,
+    message: 'input username'
+  });
+  if (!req.body.password) return res.status(400).json({
+    creator: creator,
+    message: 'input password'
+  });
+  try {
+    const session_id = await getCookie(req.body.username, req.body.password);
+    res.json({
+      creator: creator,
+      cookie: session_id
+    })
+  } catch (Error) {
+    console.log(Error)
+    res.status(400).json({
+      creator: creator,
+      message: Error
+    })
+  }
+});
 module.exports = sh;
-/*
-penulis: https://github.com/xznsenpai
-*/
